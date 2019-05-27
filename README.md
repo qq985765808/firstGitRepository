@@ -1,2 +1,2 @@
 #firstGitRepository 
-# This is  a simple e-commerce demo 
+#This is  a simple e-commerce demo 
