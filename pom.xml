@@ -35,6 +35,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- thymeleaf模板 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- Cache  -->
 <!--        <dependency>
             <groupId>org.springframework.boot</groupId>
