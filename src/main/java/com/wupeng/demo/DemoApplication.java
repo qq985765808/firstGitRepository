@@ -1,5 +1,8 @@
 package com.wupeng.demo;
 
+import com.wupeng.demo.pojo.OrderInfo;
+import com.wupeng.demo.service.RedisService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "index")
 public class DemoApplication {
+
+    @Autowired
+    private RedisService redisService;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -32,6 +38,48 @@ public class DemoApplication {
         model.addAttribute("status",false);
         return "error";
     }
+
+    @RequestMapping(value = "saveOrder")
+    public  Object saveOrder(
+            @RequestParam(value = "orderId",required = false)Long  orderId,
+            @RequestParam(value = "orderSysNum",required = false)String orderSysNum,
+            Model model
+    ){
+        if(orderId != null && !"".equals(orderSysNum) &&  orderSysNum!=null){
+            OrderInfo orderInfo  = new OrderInfo();
+            orderInfo.setOrderId(orderId);
+            orderInfo.setOrderSysNum(orderSysNum);
+            redisService.set(orderId+"",orderInfo);
+            model.addAttribute("msg","已经保存到缓存里面去了！");
+            model.addAttribute("status",true);
+            return  "index";
+        }
+        model.addAttribute("msg","登录失败,参数错误！");
+        model.addAttribute("status",false);
+        return "error";
+    }
+
+    @RequestMapping(value = "getOrderInfoById")
+    public  Object getOrderInfoById(
+            @RequestParam(value = "orderId",required = false)Long  orderId,
+            Model model
+    ){
+        if(orderId!=null){
+            OrderInfo orderInfo = (OrderInfo) redisService.get(orderId+"");
+            if(orderInfo==null){
+                model.addAttribute("msg","查询失败,无此订单id！");
+                model.addAttribute("status",false);
+                return "error";
+            }
+            model.addAttribute("msg","订单id："+orderInfo.getOrderId()+"订单号:"+orderInfo.getOrderSysNum()+"");
+            model.addAttribute("status",true);
+            return  "index";
+        }
+        model.addAttribute("msg","登录失败,参数错误！");
+        model.addAttribute("status",false);
+        return "error";
+    }
+
 
 
 }
