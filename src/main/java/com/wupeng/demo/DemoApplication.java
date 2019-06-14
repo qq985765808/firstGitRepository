@@ -1,6 +1,7 @@
 package com.wupeng.demo;
 
 import com.wupeng.demo.pojo.OrderInfo;
+import com.wupeng.demo.service.OrderInfoService;
 import com.wupeng.demo.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 
 @SpringBootApplication
 @Controller
@@ -18,6 +22,8 @@ public class DemoApplication {
 
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private OrderInfoService orderInfoService;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -80,7 +86,33 @@ public class DemoApplication {
         return "error";
     }
 
+    @RequestMapping(value = "saveOrderInfo")
+    public  Object saveOrderInfo(
+            @RequestParam(value = "orderId",required = false)Long orderId,
+            @RequestParam(value = "orderSysNum",required = false)String orderSysNum,
+            @RequestParam(value = "orderName",required = false)String orderName,
+            Model model
+    ){
+        if (orderId!=null && orderSysNum!=null && orderName!=null ){
+             OrderInfo orderInfo = new OrderInfo();
+             orderInfo.setOrderId(orderId);
+             orderInfo.setOrderName(orderName);
+             orderInfo.setOrderSysNum(orderSysNum);
+             orderInfo.setOrderNum(1);
+             orderInfo.setOrderPrice(BigDecimal.TEN);
+             orderInfo.setOrderTime(new Date());
+             orderInfo.setOrderStatus(OrderInfo.ORDERSTATUS_SUCCESS);
+             redisService.set(orderId+"",orderInfo);
+             orderInfoService.saveOrderInfo(orderInfo);
+            model.addAttribute("msg","已经保存到redis缓存和数据库里面去了！");
+            model.addAttribute("status",true);
+            return  "index";
 
+        }
+        model.addAttribute("msg","保存订单失败,参数错误！");
+        model.addAttribute("status",false);
+        return "error";
+    }
 
 
 
