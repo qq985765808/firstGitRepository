@@ -37,5 +37,17 @@
           </tr>
     </tbody>
 </table>
+<p>新增订单信息</p>
+<form action="/index/saveOrder" content="utf-8"  method="post">
+    订单名称:<input type="text" id="orderName" name="orderName"/><br/>
+    订单号:<input type="text" id="orderSysNum" name="orderSysNum"/><br/>
+    订单商品数量:<input type="number" id="orderNum" name="orderNum"/></br>
+    订单商品价格:<input type="number" id="orderPrice" name="orderPrice"/></br>
+    订单商品id:<input type="number" id="productsId" name="productsId"/></br>
+    订单用户id:<input type="number" id="userId" name="userId"/></br>
+    订单状态:<input type="number" id="orderStatus"  name="orderStatus" min="0" max="2" /></br>
+    <button type="submit" id="btn">提交</button>
+    <button type="reset"  >重置</button>
+</form>
 </body>
 </html>

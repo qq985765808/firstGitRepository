@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,16 +47,13 @@ public class DemoApplication {
     }
 
     @RequestMapping(value = "saveOrder")
-    public  Object saveOrder(
-            @RequestParam(value = "orderId",required = false)Long  orderId,
-            @RequestParam(value = "orderSysNum",required = false)String orderSysNum,
+    public  Object saveOrder(@ModelAttribute OrderInfo orderInfo,
             Model model
     ){
-        if(orderId != null && !"".equals(orderSysNum) &&  orderSysNum!=null){
-            OrderInfo orderInfo  = new OrderInfo();
-            orderInfo.setOrderId(orderId);
-            orderInfo.setOrderSysNum(orderSysNum);
-            redisService.set(orderId+"",orderInfo);
+        if(orderInfo != null  && orderInfo.getOrderSysNum()!=null){
+            orderInfo.setOrderTime(new Date());
+            orderInfoService.saveOrderInfo(orderInfo);
+            redisService.set(orderInfo.getOrderId()+"",orderInfo);
             model.addAttribute("msg","已经保存到redis缓存里面去了！");
             model.addAttribute("status",true);
             return  "index";
