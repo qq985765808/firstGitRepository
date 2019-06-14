@@ -88,22 +88,20 @@ public class DemoApplication {
 
     @RequestMapping(value = "saveOrderInfo")
     public  Object saveOrderInfo(
-            @RequestParam(value = "orderId",required = false)Long orderId,
             @RequestParam(value = "orderSysNum",required = false)String orderSysNum,
             @RequestParam(value = "orderName",required = false)String orderName,
             Model model
     ){
-        if (orderId!=null && orderSysNum!=null && orderName!=null ){
+        if (orderSysNum!=null && orderName!=null ){
              OrderInfo orderInfo = new OrderInfo();
-             orderInfo.setOrderId(orderId);
              orderInfo.setOrderName(orderName);
              orderInfo.setOrderSysNum(orderSysNum);
              orderInfo.setOrderNum(1);
              orderInfo.setOrderPrice(BigDecimal.TEN);
              orderInfo.setOrderTime(new Date());
              orderInfo.setOrderStatus(OrderInfo.ORDERSTATUS_SUCCESS);
-             redisService.set(orderId+"",orderInfo);
              orderInfoService.saveOrderInfo(orderInfo);
+            redisService.set(orderInfo.getOrderId()+"",orderInfo);
             model.addAttribute("msg","已经保存到redis缓存和数据库里面去了！");
             model.addAttribute("status",true);
             return  "index";
