@@ -112,6 +112,12 @@ public class DemoApplication {
         return "error";
     }
 
-
+    @RequestMapping(value = "getOrderInfoAll")
+    public Object getOrderInfoAll(
+            Model model
+    ){
+        model.addAttribute("orderList",orderInfoService.findAll());
+        return "orderInfo";
+    }
 
 }

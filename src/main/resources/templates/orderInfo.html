@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>订单信息页面</title>
+</head>
+<body>
+<table>
+       <thead>
+             <tr>
+                 <td>订单id</td>
+                 <td>订单名称</td>
+                 <td>订单号</td>
+                 <td>订单商品数量</td>
+                 <td>订单商品价格</td>
+                 <td>订单商品id</td>
+                 <td>订单用户id</td>
+                 <td>订单下单时间</td>
+                 <td>订单状态</td>
+             </tr>
+       </thead>
+    <tbody>
+          <tr th:each="orderInfo,userStat:${orderList}">
+              <td th:text="${orderInfo.getOrderId()}"></td>
+              <td th:text="${orderInfo.getOrderName()}"></td>
+              <td th:text="${orderInfo.getOrderSysNum()}"></td>
+              <td th:text="${orderInfo.getOrderNum()}"></td>
+              <td th:text="${orderInfo.getOrderPrice()}"></td>
+              <td th:text="${orderInfo.getProductsId()}"></td>
+              <td th:text="${orderInfo.getUserId()}"></td>
+              <td th:text="${orderInfo.getOrderTime()}"></td>
+              <td th:switch="${orderInfo.getOrderStatus()}">
+                  <p th:case="0">异常</p>
+                  <p th:case="1">正常</p>
+                  <p th:case="2">退单</p>
+              </td>
+          </tr>
+    </tbody>
+</table>
+</body>
+</html>
