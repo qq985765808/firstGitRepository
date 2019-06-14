@@ -50,7 +50,7 @@ public class DemoApplication {
             orderInfo.setOrderId(orderId);
             orderInfo.setOrderSysNum(orderSysNum);
             redisService.set(orderId+"",orderInfo);
-            model.addAttribute("msg","已经保存到缓存里面去了！");
+            model.addAttribute("msg","已经保存到redis缓存里面去了！");
             model.addAttribute("status",true);
             return  "index";
         }
@@ -79,6 +79,8 @@ public class DemoApplication {
         model.addAttribute("status",false);
         return "error";
     }
+
+
 
 
 
