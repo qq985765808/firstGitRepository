@@ -14,6 +14,6 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,Long> {
     @Override
     <S extends UserInfo> S save(S s);
 
-    @Query(value = "select  * from tab_user_info where user_name = ?1 and user_password = ?2",nativeQuery = true)
+    @Query(value = "select  * from userinfo.tab_user_info where user_name = ?1 and user_password = ?2",nativeQuery = true)
     List<UserInfo>  getUserInfoByUserNameAndPassword(String userName,String password);
 }
