@@ -1,8 +1,10 @@
 package com.wupeng.demo;
 
 import com.wupeng.demo.pojo.OrderInfo;
+import com.wupeng.demo.pojo.UserInfo;
 import com.wupeng.demo.service.OrderInfoService;
 import com.wupeng.demo.service.RedisService;
+import com.wupeng.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +27,8 @@ public class DemoApplication {
     private RedisService redisService;
     @Autowired
     private OrderInfoService orderInfoService;
+    @Autowired
+    private UserInfoService userInfoService;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -32,11 +36,12 @@ public class DemoApplication {
 
     @RequestMapping(value = "getIndex")
     public Object getLogin(
-            @RequestParam(value ="userId",required = false)Long userId,
+            @RequestParam(value ="userName",required = false)String userName,
             @RequestParam(value ="password",required = false)String password,
             Model model
     ){
-        if(userId!=null && userId==1 && password!=null &&  "123456".equals(password)){
+        if(userName!=null && password!=null
+                && userInfoService.getUserInfoByUserNameAndPassword(userName,password).size()>0 ){
             model.addAttribute("msg","登录成功");
             model.addAttribute("status",true);
             return  "index";
@@ -118,4 +123,22 @@ public class DemoApplication {
         return "orderInfo";
     }
 
+
+    @RequestMapping(value = "saveUserInfo")
+    public  Object saveUserInfo(@ModelAttribute UserInfo userInfo,
+                             Model model
+    ){
+        if(userInfo != null  && userInfo.getUserName()!=null && userInfo.getPassword()!=null){
+            userInfo.setCreateTime(new Date());
+            userInfo.setUpdateTime(new Date());
+            userInfoService.saveUserInfo(userInfo);
+            redisService.set(userInfo.getUserId()+"",userInfo);
+            model.addAttribute("msg","已经保存到redis缓存和数据库里面去了！");
+            model.addAttribute("status",true);
+            return  "index";
+        }
+        model.addAttribute("msg","新增用户信息失败,参数错误！");
+        model.addAttribute("status",false);
+        return "error";
+    }
 }
