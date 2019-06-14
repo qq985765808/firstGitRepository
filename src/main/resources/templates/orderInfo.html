@@ -28,7 +28,7 @@
               <td th:text="${orderInfo.getOrderPrice()}"></td>
               <td th:text="${orderInfo.getProductsId()}"></td>
               <td th:text="${orderInfo.getUserId()}"></td>
-              <td th:text="${orderInfo.getOrderTime()}"></td>
+              <td th:text="${#dates.format(orderInfo.getOrderTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
               <td th:switch="${orderInfo.getOrderStatus()}">
                   <p th:case="0">异常</p>
                   <p th:case="1">正常</p>
