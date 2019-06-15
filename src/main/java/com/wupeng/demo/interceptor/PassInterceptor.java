@@ -1,5 +1,7 @@
 package com.wupeng.demo.interceptor;
 
+import com.wupeng.demo.service.RedisService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,14 +14,30 @@ import javax.servlet.http.HttpServletResponse;
  * */
 public class PassInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private RedisService redisService;
+
+
     @Override
    public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String url = request.getRequestURI();
         System.out.println(url);
-        if(url!=null && url.indexOf("getIndex")==-1){
-            response.sendRedirect("/index/getIndex");
-            return false;
+        // url.indexOf("getIndex")==-1
+
+        if(url!=null ){
+            try{
+                if( redisService.get("userLogin")==null){
+                    response.sendRedirect("/index/getIndex");
+                    return false;
+                }
+                return   true;
+            }catch (Exception e){
+                e.printStackTrace();
+                response.sendRedirect("/index/getIndex");
+                return  false;
+            }
+
         }
         return true;
     }

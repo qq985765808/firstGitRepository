@@ -42,6 +42,7 @@ public class DemoApplication {
     ){
         if(userName!=null && password!=null
                 && userInfoService.getUserInfoByUserNameAndPassword(userName,password).size()>0 ){
+            redisService.set("userLogin",userName);
             model.addAttribute("msg","登录成功");
             model.addAttribute("status",true);
             return  "index";
