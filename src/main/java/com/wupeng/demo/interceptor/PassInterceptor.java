@@ -18,7 +18,7 @@ public class PassInterceptor implements HandlerInterceptor {
         String url = request.getRequestURI();
         System.out.println(url);
         if(url!=null && url.indexOf("getIndex")==-1){
-            response.sendRedirect("/index/getOrderInfoAll");
+            response.sendRedirect("/index/getIndex");
             return false;
         }
         return true;
