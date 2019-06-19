@@ -8,6 +8,7 @@ import com.wupeng.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -122,6 +123,15 @@ public class DemoApplication {
     ){
         model.addAttribute("orderList",orderInfoService.findAll());
         return "orderInfo";
+    }
+
+    @RequestMapping(value = "getOrderInfoDtoDate")
+    public Object getOrderInfoDtoDate(
+            Model model
+    ){
+        System.out.println(orderInfoService.getOrderInfoNameAndTime().toString());
+       model.addAttribute("orderDtoList",orderInfoService.getOrderInfoNameAndTime());
+        return "orderDto";
     }
 
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>订单Dto数据显示页面</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>订单id</td>
+        <td>订单号</td>
+        <td>订单下单时间</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orderDto,userStat:${orderDtoList}">
+        <td th:text="${orderDto.getOrderId()}"></td>
+        <td th:text="${orderDto.getOrderSysNum()}"></td>
+        <td th:text="${#dates.format(orderDto.getOrderTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

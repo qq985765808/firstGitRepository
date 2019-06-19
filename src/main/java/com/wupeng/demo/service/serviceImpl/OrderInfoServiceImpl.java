@@ -1,5 +1,6 @@
 package com.wupeng.demo.service.serviceImpl;
 
+import com.wupeng.demo.dto.OrderDto;
 import com.wupeng.demo.pojo.OrderInfo;
 import com.wupeng.demo.repository.OrderInfoRepository;
 import com.wupeng.demo.service.OrderInfoService;
@@ -25,5 +26,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public void saveOrderInfo(OrderInfo orderInfo) {
          orderInfoRepository.save(orderInfo);
+    }
+
+    @Override
+    public List<OrderDto> getOrderInfoNameAndTime() {
+        return orderInfoRepository.getOrderInfoNameAndTime();
     }
 }
