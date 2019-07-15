@@ -52,7 +52,6 @@ public class DemoApplication {
         model.addAttribute("status",false);
         return "error";
     }
-
     @RequestMapping(value = "saveOrder")
     public  Object saveOrder(@ModelAttribute OrderInfo orderInfo,
             Model model
