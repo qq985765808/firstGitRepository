@@ -1,12 +1,11 @@
 package com.wupeng.demo.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name="tab_seckilling_activity")
 public class SeckillingActivity implements Serializable {
 
     private static final long serialVersionUID = 1L;
