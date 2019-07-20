@@ -162,9 +162,10 @@ public class DemoApplication {
             Model model
     ){
         if(seckillingActivityId!=null && !"".equals(seckillingActivityId)){
-            model.addAttribute("seckillingActivityList",seckillingActivityService.updateSeckillingActivityProductsNumSubOneById(seckillingActivityId));
+            model.addAttribute("seckillingActivityList",seckillingActivityService.getSeckillingActivityById(seckillingActivityId));
+        }else{
+            model.addAttribute("seckillingActivityList",seckillingActivityService.findAll());
         }
-
        return  "seckillingActivity";
 }
 

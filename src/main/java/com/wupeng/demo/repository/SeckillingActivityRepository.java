@@ -22,4 +22,10 @@ public interface SeckillingActivityRepository  extends JpaRepository<SeckillingA
             " and seckilling_activity_endTime <= SYSDATE() ",nativeQuery = true)
     public  int updateSeckillingActivityProductsNumSubOneById(Long seckillingActivityId);
 
+
+    @Override
+    <S extends SeckillingActivity> S save(S s);
+
+    @Override
+    SeckillingActivity getOne(Long seckillingActivityId);
 }
