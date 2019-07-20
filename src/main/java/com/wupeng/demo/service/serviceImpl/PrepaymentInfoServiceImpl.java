@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Service(value = "prepaymentInfoService")
+@Service
 @Transactional
 public class PrepaymentInfoServiceImpl implements PrepaymentInfoService {
 

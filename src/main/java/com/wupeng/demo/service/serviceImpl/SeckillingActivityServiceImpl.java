@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Service(value = "seckillingActivityService")
+@Service
 @Transactional
 public class SeckillingActivityServiceImpl implements SeckillingActivityService {
 

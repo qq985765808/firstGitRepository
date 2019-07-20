@@ -151,4 +151,10 @@ public class DemoApplication {
         model.addAttribute("status",false);
         return "error";
     }
+
+    @RequestMapping(value = "getSeckillingActivity")
+    public Object getSeckillingActivity(){
+       return  "seckillingActivity";
+}
+
 }
