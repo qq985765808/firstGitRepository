@@ -1,6 +1,7 @@
 package com.wupeng.demo;
 
 import com.wupeng.demo.pojo.OrderInfo;
+import com.wupeng.demo.pojo.SeckillingActivity;
 import com.wupeng.demo.pojo.UserInfo;
 import com.wupeng.demo.repository.SeckillingActivityRepository;
 import com.wupeng.demo.service.OrderInfoService;
@@ -167,6 +168,13 @@ public class DemoApplication {
             model.addAttribute("seckillingActivityList",seckillingActivityService.findAll());
         }
        return  "seckillingActivity";
-}
+    }
+
+    @RequestMapping(value = "saveSeckillingActivity")
+    public Object saveSeckillingActivity(
+            SeckillingActivity seckillingActivity
+    ){
+        return true;
+    }
 
 }
