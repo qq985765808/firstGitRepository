@@ -21,7 +21,7 @@ function  createXmlHttpRequest(){
   }
 
 
-  /**q请求参数追加  */
+  /**请求参数追加  */
   function paramsFlush(paramsArray){
       if(paramsArray!=null &&  paramsArray!=undefined && ""!=paramsArray && paramsArray.length>=1){
           var params = "";
@@ -34,7 +34,6 @@ function  createXmlHttpRequest(){
                   }else{
                       params += "&"+paramsArray[i];
                   }
-
               }
           }
           return params;
