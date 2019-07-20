@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>商品秒杀活动页面</title>
+    <script th:src="@{/static/js/test.js}"></script>
+
 
 </head>
 <body>
@@ -10,6 +12,14 @@
 <div>
 
 </div>
-
+     <button id="btn" onclick="getSeckillingActivity()" value="获取秒杀活动信息"></button>
 </body>
+<script>
+    function getSeckillingActivity(){
+        var params  = "seckillingActivityId=1";
+        var url = "/index/getSeckillingActivity";
+        sendHttpRequest("post",url,true,params);
+    }
+
+</script>
 </html>
