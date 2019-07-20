@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @SpringBootApplication
@@ -174,7 +177,20 @@ public class DemoApplication {
     public Object saveSeckillingActivity(
             SeckillingActivity seckillingActivity
     ){
-        return true;
+        Map<String,Object> map = new HashMap<>();
+        try{
+            seckillingActivity.setSeckillingActivityBeginTime(new Date());
+            SimpleDateFormat sdf = new SimpleDateFormat("2019年09月01日 23:59:59");
+            seckillingActivity.setSeckillingActivityEndTime(sdf.parse(sdf.format(new Date())));
+            seckillingActivityService.save(seckillingActivity);
+            map.put("msg","新增信息成功");
+            map.put("status",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("msg","新增信息失败");
+            map.put("status",false);
+        }
+        return map;
     }
 
 }
