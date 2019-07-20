@@ -2,8 +2,10 @@ package com.wupeng.demo;
 
 import com.wupeng.demo.pojo.OrderInfo;
 import com.wupeng.demo.pojo.UserInfo;
+import com.wupeng.demo.repository.SeckillingActivityRepository;
 import com.wupeng.demo.service.OrderInfoService;
 import com.wupeng.demo.service.RedisService;
+import com.wupeng.demo.service.SeckillingActivityService;
 import com.wupeng.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +32,8 @@ public class DemoApplication {
     private OrderInfoService orderInfoService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private SeckillingActivityService seckillingActivityService;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -153,7 +157,14 @@ public class DemoApplication {
     }
 
     @RequestMapping(value = "getSeckillingActivity")
-    public Object getSeckillingActivity(){
+    public Object getSeckillingActivity(
+            @RequestParam(value = "seckillingActivityId",required = false)Long seckillingActivityId,
+            Model model
+    ){
+        if(seckillingActivityId!=null && !"".equals(seckillingActivityId)){
+            model.addAttribute("seckillingActivityList",seckillingActivityService.updateSeckillingActivityProductsNumSubOneById(seckillingActivityId));
+        }
+
        return  "seckillingActivity";
 }
 
