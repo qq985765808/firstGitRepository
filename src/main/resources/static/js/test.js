@@ -13,6 +13,10 @@ function  createXmlHttpRequest(){
           if (xhr.readyState == 4 & xhr.status == 200) {
               var messages = xhr.responseText;
               console.log(messages);
+          }else if(xhr.readyState == 1  & xhr.status == 404){
+              alert("网址错误");
+          }else if(xhr.readyState == 4 &  xhr.status == 500){
+              alert("服务器异常");
           }
       }
       xhr.open(method,url,async);
@@ -39,4 +43,14 @@ function  createXmlHttpRequest(){
           return params;
       }
       return null;
+  }
+
+  /**验证是否为数字  */
+  function  isNumber(dom){
+       var reg = new RegExp("^[0-9]*$");
+      if(dom.value!=undefined && ""!=dom.value && reg.test(dom.value)){
+
+      }else{
+          dom.value = 1;
+      }
   }

@@ -11,8 +11,8 @@
 <p>商品秒杀活动信息如下：</p>
 <div>
     秒杀活动名称：<input type="text" id="seckillingActivityName"/><br>
-    秒杀商品编号：<input type="number" id="productsId" min="1" /><br>
-    秒杀活动数量：<input type="number" id="seckillingActivityProductsNum" min="1"/><br>
+    秒杀商品编号：<input type="number" id="productsId" onchange="isNumber(this)" min="1" /><br>
+    秒杀活动数量：<input type="number" id="seckillingActivityProductsNum" onchange="isNumber(this)"  min="1"/><br>
     秒杀活动介绍：<input type="text" id="seckillingActivityIntroduction"/>
 </div>
      <input type="button" id="btn" onclick="getSeckillingActivity()" value="获取秒杀活动信息"></input>
@@ -32,7 +32,7 @@
         arr.push("productsId="+document.getElementById("productsId").value);
         arr.push("seckillingActivityProductsNum="+document.getElementById("seckillingActivityProductsNum").value);
         arr.push("seckillingActivityIntroduction="+document.getElementById("seckillingActivityIntroduction").value);
-        var url = "/index/saveSeckillingActivity";
+        var url = "/index/saveSeckillingActivity2";
 //        console.log(paramsFlush(arr));
         sendHttpRequest("post",url,true,paramsFlush(arr));
     }
