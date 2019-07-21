@@ -117,7 +117,7 @@ public class PayCommonUtil {
      */
     public static String getCurrTime() {
         Date now = new Date();
-        SimpleDateFormat outFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat outFormat = new SimpleDateFormat("yyyyMMdd HHmmss");
         String s = outFormat.format(now);
         return s;
     }

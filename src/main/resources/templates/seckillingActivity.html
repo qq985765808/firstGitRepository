@@ -12,8 +12,8 @@
 <div>
 
 </div>
-     <button id="btn" onclick="getSeckillingActivity()" value="获取秒杀活动信息"></button>
-     <button id="save" onclick="saveSeckillingActivity()" value="新增秒杀活动信息"></button>
+     <input type="button" id="btn" onclick="getSeckillingActivity()" value="获取秒杀活动信息"></input>
+     <input type="button" id="save" onclick="saveSeckillingActivity()" value="新增秒杀活动信息"></input>
 </body>
 <script>
     function getSeckillingActivity(){
@@ -24,13 +24,14 @@
 
     function saveSeckillingActivity(){
         var arr = [];
-        arr.push("seckilling_activity_id=1");
-        arr.push("seckilling_activity_name="+"测试秒杀活动信息"+"");
-        arr.push("products_id=1");
-        arr.push("seckilling_activity_productsNum=20");
-        arr.push("seckilling_activity_introduction="+"这是first个测试秒杀活动信息介绍"+"");
+//        arr.push("seckilling_activity_id=1");
+        arr.push("seckillingActivityName="+"测试秒杀活动信息"+"");
+        arr.push("productsId=1");
+        arr.push("seckillingActivityProductsNum=40");
+        arr.push("seckillingActivityIntroduction="+"这是第5个测试秒杀活动信息介绍"+"");
         var url = "/index/saveSeckillingActivity";
-        sendHttpRequest("post",url,true,paramsFlush(arr));
+        console.log(paramsFlush(arr));
+        sendHttpRequest("post",url,true,""+paramsFlush(arr));
     }
 
 </script>
