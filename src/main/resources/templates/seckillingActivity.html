@@ -10,7 +10,10 @@
 <body>
 <p>商品秒杀活动信息如下：</p>
 <div>
-
+    秒杀活动名称：<input type="text" id="seckillingActivityName"/><br>
+    秒杀商品编号：<input type="number" id="productsId" min="1" /><br>
+    秒杀活动数量：<input type="number" id="seckillingActivityProductsNum" min="1"/><br>
+    秒杀活动介绍：<input type="text" id="seckillingActivityIntroduction"/>
 </div>
      <input type="button" id="btn" onclick="getSeckillingActivity()" value="获取秒杀活动信息"></input>
      <input type="button" id="save" onclick="saveSeckillingActivity()" value="新增秒杀活动信息"></input>
@@ -25,12 +28,12 @@
     function saveSeckillingActivity(){
         var arr = [];
 //        arr.push("seckilling_activity_id=1");
-        arr.push("seckillingActivityName="+"测试秒杀活动信息"+"");
-        arr.push("productsId=1");
-        arr.push("seckillingActivityProductsNum=40");
-        arr.push("seckillingActivityIntroduction="+"这是第5个测试秒杀活动信息介绍"+"");
+        arr.push("seckillingActivityName="+document.getElementById("seckillingActivityName").value);
+        arr.push("productsId="+document.getElementById("productsId").value);
+        arr.push("seckillingActivityProductsNum="+document.getElementById("seckillingActivityProductsNum").value);
+        arr.push("seckillingActivityIntroduction="+document.getElementById("seckillingActivityIntroduction").value);
         var url = "/index/saveSeckillingActivity";
-        console.log(paramsFlush(arr));
+//        console.log(paramsFlush(arr));
         sendHttpRequest("post",url,true,""+paramsFlush(arr));
     }
 
