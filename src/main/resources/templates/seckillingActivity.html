@@ -9,6 +9,29 @@
 </head>
 <body>
 <p>商品秒杀活动信息如下：</p>
+<table>
+<thead>
+<tr>
+    <td>秒杀活动名称</td>
+    <td>秒杀商品编号</td>
+    <td>秒杀活动数量</td>
+    <td>秒杀开始时间</td>
+    <td>秒杀结束时间</td>
+    <td>秒杀活动介绍</td>
+</tr>
+</thead>
+<tbody>
+<tr th:each="seckillingActivity,userStat:${seckillingActivityList}">
+    <td th:text="${seckillingActivity.getSeckillingActivityName()}"></td>
+    <td th:text="${seckillingActivity.getProductsId()}"></td>
+    <td th:text="${#dates.format(seckillingActivity.getSeckillingActivityBeginTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+    <td th:text="${#dates.format(seckillingActivity.getSeckillingActivityEndTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+    <td th:text="${seckillingActivity.getSeckillingActivityProductsNum()}"></td>
+    <td th:text="${seckillingActivity.getSeckillingActivityIntroduction()}"></td>
+</tr>
+</tbody>
+</table>
+<p>新增商品秒杀活动信息：</p>
 <div>
     秒杀活动名称：<input type="text" id="seckillingActivityName"/><br>
     秒杀商品编号：<input type="number" id="productsId" onchange="isNumber(this)" min="1" /><br>
