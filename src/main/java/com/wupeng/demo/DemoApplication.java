@@ -215,26 +215,26 @@ public class DemoApplication {
 
     @RequestMapping(value = "/updateRedisCache")
     @ResponseBody
-    public  Object  updateRedisCache(Long  seckillingActivityId
+    public synchronized  Object  updateRedisCache(Long  seckillingActivityId
     ){
         Map<String,Object> map = new HashMap<>();
         SeckillingActivity seckillingActivity = null;
         try{
-            seckillingActivity = (SeckillingActivity)redisService.get("seckillingActivityId="+seckillingActivityId);
-            if (seckillingActivity!=null && seckillingActivity.getSeckillingActivityProductsNum() > 0 ){
-                seckillingActivity.setSeckillingActivityProductsNum(seckillingActivity.getSeckillingActivityProductsNum()-1);
-                redisService.set("seckillingActivityId="+seckillingActivity.getSeckillingActivityId(),seckillingActivity);
-                map.put("msg","亲，恭喜你已经抢到了商品，静等商品发货，谢谢！");
-                map.put("status",true);
-            }else{
-                map.put("msg","亲，此秒杀活动商品库存不足，请留意最近的的秒杀活动，谢谢！");
-                map.put("status",false);
-            }
+            seckillingActivity = (SeckillingActivity) redisService.get("seckillingActivityId=" + seckillingActivityId);
+                if (seckillingActivity != null && seckillingActivity.getSeckillingActivityProductsNum() > 0) {
+                    seckillingActivity.setSeckillingActivityProductsNum(seckillingActivity.getSeckillingActivityProductsNum() - 1);
+                    redisService.set("seckillingActivityId=" + seckillingActivity.getSeckillingActivityId(), seckillingActivity);
+                    map.put("msg", "亲，恭喜你已经抢到了商品，静等商品发货，谢谢！");
+                    map.put("status", true);
+                } else {
+                    map.put("msg", "亲，此秒杀活动商品库存不足，请留意最近的的秒杀活动，谢谢！");
+                    map.put("status", false);
+                }
+
         }catch (Exception e){
             map.put("msg","亲，此秒杀活动信息已失效了，请留意最近的的秒杀活动，谢谢！");
             map.put("status",false);
         }
-
         return map;
     }
 }
