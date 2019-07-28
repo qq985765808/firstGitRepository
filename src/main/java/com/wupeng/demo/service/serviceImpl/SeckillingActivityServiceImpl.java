@@ -17,7 +17,7 @@ public class SeckillingActivityServiceImpl implements SeckillingActivityService 
     private SeckillingActivityRepository seckillingActivityRepository;
 
     public  int updateSeckillingActivityProductsNumSubOneById(Long seckillingActivityId){
-        return  0;
+        return seckillingActivityRepository.updateSeckillingActivityProductsNumSubOneById(seckillingActivityId);
     }
 
     @Override

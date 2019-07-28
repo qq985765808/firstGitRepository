@@ -195,4 +195,19 @@ public class DemoApplication {
         return map;
     }
 
+    @RequestMapping(value = "/updateSeckillingActivityProductsNumSubOneById")
+    @ResponseBody
+    public Object updateSeckillingActivityProductsNumSubOneById(
+           @RequestParam(value = "seckillingActivityId",required = false)Long  seckillingActivityId
+    ){
+        Map<String,Object> map = new HashMap<>();
+        if(seckillingActivityService.updateSeckillingActivityProductsNumSubOneById(seckillingActivityId)>0){
+            map.put("msg","亲，下单成功，马上商品发货。");
+            map.put("statuc",true);
+        }else{
+            map.put("msg","亲，下单失败，商品库存不足");
+            map.put("statuc",false);
+        }
+        return map;
+    }
 }

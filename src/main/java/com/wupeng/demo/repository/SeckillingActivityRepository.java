@@ -18,8 +18,8 @@ public interface SeckillingActivityRepository  extends JpaRepository<SeckillingA
 
     @Modifying
     @Query(value = "update tab_seckilling_activity set seckilling_activity_productsNum = seckilling_activity_productsNum -1 " +
-            " where seckilling_activity_id = ?1  and seckilling_activity_productsNum > 0  and seckilling_activity_beginTime  >= SYSDATE() " +
-            " and seckilling_activity_endTime <= SYSDATE() ",nativeQuery = true)
+            " where seckilling_activity_id = ?1  and seckilling_activity_productsNum > 0  and seckilling_activity_beginTime  <= SYSDATE() " +
+            " and seckilling_activity_endTime >= SYSDATE() ",nativeQuery = true)
     public  int updateSeckillingActivityProductsNumSubOneById(Long seckillingActivityId);
 
 
