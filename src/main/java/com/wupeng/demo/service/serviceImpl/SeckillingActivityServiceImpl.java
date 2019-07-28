@@ -30,6 +30,7 @@ public class SeckillingActivityServiceImpl implements SeckillingActivityService 
         return seckillingActivityRepository.getOne(seckillingActivityId);
     }
 
+
     @Override
     public List<SeckillingActivity> findAll() {
         return seckillingActivityRepository.findAll();

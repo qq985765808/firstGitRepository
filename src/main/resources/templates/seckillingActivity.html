@@ -55,7 +55,7 @@
         arr.push("productsId="+document.getElementById("productsId").value);
         arr.push("seckillingActivityProductsNum="+document.getElementById("seckillingActivityProductsNum").value);
         arr.push("seckillingActivityIntroduction="+document.getElementById("seckillingActivityIntroduction").value);
-        var url = "/index/saveSeckillingActivity2";
+        var url = "/index/saveSeckillingActivity";
 //        console.log(paramsFlush(arr));
         sendHttpRequest("post",url,true,paramsFlush(arr));
     }
