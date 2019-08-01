@@ -215,12 +215,13 @@ public class DemoApplication {
 
     @RequestMapping(value = "/updateRedisCache")
     @ResponseBody
-    public synchronized  Object  updateRedisCache(Long  seckillingActivityId
+    public   Object  updateRedisCache(Long  seckillingActivityId
     ){
         Map<String,Object> map = new HashMap<>();
         SeckillingActivity seckillingActivity = null;
-        try{
-            seckillingActivity = (SeckillingActivity) redisService.get("seckillingActivityId=" + seckillingActivityId);
+        synchronized(seckillingActivityId){
+            try{
+                seckillingActivity = (SeckillingActivity) redisService.get("seckillingActivityId=" + seckillingActivityId);
                 if (seckillingActivity != null && seckillingActivity.getSeckillingActivityProductsNum() > 0) {
                     seckillingActivity.setSeckillingActivityProductsNum(seckillingActivity.getSeckillingActivityProductsNum() - 1);
                     redisService.set("seckillingActivityId=" + seckillingActivity.getSeckillingActivityId(), seckillingActivity);
@@ -231,10 +232,13 @@ public class DemoApplication {
                     map.put("status", false);
                 }
 
-        }catch (Exception e){
-            map.put("msg","亲，此秒杀活动信息已失效了，请留意最近的的秒杀活动，谢谢！");
-            map.put("status",false);
+            }catch (Exception e){
+                map.put("msg","亲，此秒杀活动信息已失效了，请留意最近的的秒杀活动，谢谢！");
+                map.put("status",false);
+            }
         }
+
+
         return map;
     }
 }
