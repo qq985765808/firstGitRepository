@@ -46,8 +46,8 @@ public class DemoApplication {
 
     @RequestMapping(value = "getIndex")
     public Object getLogin(
-            @RequestParam(value ="userName",required = false)String userName,
-            @RequestParam(value ="password",required = false)String password,
+            @RequestParam(value = "userName",required = false) String userName,
+            @RequestParam(value = "password",required = false) String password,
             Model model
     ){
         if(userName!=null && password!=null
@@ -57,9 +57,10 @@ public class DemoApplication {
             model.addAttribute("status",true);
             return  "index";
         }
-        model.addAttribute("msg","登录失败,账号或者密码错误！");
+/*        model.addAttribute("msg","登录失败,账号或者密码错误！");
         model.addAttribute("status",false);
-        return "error";
+        return "error";*/
+       return  "index";
     }
     @RequestMapping(value = "saveOrder")
     public  Object saveOrder(@ModelAttribute OrderInfo orderInfo,
@@ -237,8 +238,6 @@ public class DemoApplication {
                 map.put("status",false);
             }
         }
-
-
         return map;
     }
 }
