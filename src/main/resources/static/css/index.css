@@ -1,11 +1,11 @@
 *{margin: 0;padding: 0;list-style: none;}
 body{
     background-image: url('../../static/img/back.png');
-    background-size: 100%;
+    /*background-size: 100%;*/
 }
 .container{
-    width: 1200px;
-    height: 870px;
+ /*   width: 1200px;
+    height: 870px;*/
     margin: 0 auto;
     /* 	background: #ccc; */
 }

@@ -18,6 +18,10 @@ public class UserInfo implements Serializable {
     private  String userName;
     @Column(name = "user_password")
     private  String password;
+    @Column(name = "user_email")
+    private String userEmail;
+    @Column(name = "user_phoneNumber")
+    private String userPhoneNumber;
     @Column(name = "create_time")
     private  Date  createTime;
     @Column(name = "update_time")
@@ -61,5 +65,21 @@ public class UserInfo implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
+    }
+
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 }

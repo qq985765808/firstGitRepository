@@ -1,4 +1,5 @@
 var xhr;
+var pathName = document.location.pathname.substring(0,window.document.location.pathname.substr(1).indexOf('/')+1);
 function  createXmlHttpRequest(){
     if (window.ActiveXObject)
         xhr  = new ActiveXObject("Microsoft.XMLHTTP");
@@ -52,5 +53,22 @@ function  createXmlHttpRequest(){
 
       }else{
           dom.value = 1;
+      }
+  }
+
+  /**手机号码验证 */
+  function checkPhone(str){
+      if(!(/^1[3456789]\d{9}$/.test(str))){
+          alert("手机号码有误，请重填");
+          return false;
+      }
+  }
+
+  /**邮箱验证  */
+  function checkEmail(str){
+      var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+      if(!reg.test(str)){
+          alert("用户邮箱有误，请重填");
+          return false;
       }
   }

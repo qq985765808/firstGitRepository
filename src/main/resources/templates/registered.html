@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link rel="stylesheet"  th:href="@{/static/js/test.js}">
+</head>
+<body>
+     <div class="registeredDiv">
+         <p>注册用户信息</p>
+         <form action="/index/saveUserInfo" content="utf-8"  method="post">
+             用户名称:<input type="text" id="userName" name="userName"/><br/>
+             用户密码:<input type="password" id="password" name="password"/><br/>
+             用户邮箱:<input type="text" id="userEmail" name="userEmail" maxlength="50" onmouseout="checkPhone(this.value)"/><br/>
+             手机号码:<input type="text" id="userPhoneNumber" name="userPhoneNumber" maxlength="22" onmouseout="checkEmail(this.value)"/><br/>
+             <button type="submit" >提交</button>
+             <button type="reset"  >重置</button>
+         </form>
+     </div>
+</body>
+</html>

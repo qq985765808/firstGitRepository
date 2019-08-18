@@ -28,7 +28,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+  <!--          <exclusions>
+                &lt;!&ndash; 排除内置Tomcat依赖 &ndash;&gt;
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>-->
+
         </dependency>
+
+        <!-- 使用原生servlet -->
+<!--        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,7 +123,9 @@
     </dependencies>
 
     <build>
+        <finalName>firstDemo</finalName>
         <plugins>
+
  <!--           <plugin>
                    <groupId>org.apache.maven.plugins</groupId>
                    <artifactId>maven-compiler-plugin</artifactId>
@@ -143,6 +161,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- 打war包,支持Tomcat7，排除SpringBoot内嵌Tomcat8依赖。 -->
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warName>firstDemo</warName>
+                    <outputDirectory>target</outputDirectory>
+                    &lt;!&ndash; 排除内嵌Tomcat8依赖jar  &ndash;&gt;
+                    <packagingExcludes>
+                        WEB-INF/lib/tomcat-annotations-api-*.jar,
+                        WEB-INF/lib/tomcat-embed-*.jar,
+                        WEB-INF/lib/spring-boot-starter-tomcat-*.jar
+                    </packagingExcludes>
+                </configuration>
+            </plugin>-->
+
         </plugins>
     </build>
 

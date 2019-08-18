@@ -1,16 +1,19 @@
 package com.wupeng.demo;
 
 import com.wupeng.demo.pojo.OrderInfo;
+import com.wupeng.demo.pojo.RecordIp;
 import com.wupeng.demo.pojo.SeckillingActivity;
 import com.wupeng.demo.pojo.UserInfo;
 import com.wupeng.demo.repository.SeckillingActivityRepository;
-import com.wupeng.demo.service.OrderInfoService;
-import com.wupeng.demo.service.RedisService;
-import com.wupeng.demo.service.SeckillingActivityService;
-import com.wupeng.demo.service.UserInfoService;
+import com.wupeng.demo.service.*;
+import com.wupeng.demo.vo.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +32,12 @@ import java.util.Map;
 @SpringBootApplication
 @Controller
 @RequestMapping(value = "index")
-public class DemoApplication {
+public class DemoApplication  extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(DemoApplication.class);
+    }
 
     @Autowired
     private RedisService redisService;
@@ -39,6 +47,9 @@ public class DemoApplication {
     private UserInfoService userInfoService;
     @Autowired
     private SeckillingActivityService seckillingActivityService;
+    @Autowired
+    private RecordIpService recordIpService;
+
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -48,6 +59,9 @@ public class DemoApplication {
     public Object getLogin(
             @RequestParam(value = "userName",required = false) String userName,
             @RequestParam(value = "password",required = false) String password,
+            @RequestParam(value = "recordIpUrl",required = false)String recordIpUrl,
+            @RequestParam(value = "recordIpAddress",required = false)String recordIpAddress,
+            @RequestParam(value = "recordIpBrower",required = false)String recordIpBrower,
             Model model
     ){
         if(userName!=null && password!=null
@@ -57,11 +71,37 @@ public class DemoApplication {
             model.addAttribute("status",true);
             return  "index";
         }
+        if(recordIpUrl!=null && !"".equals(recordIpUrl)){
+            RecordIp recordIp = new RecordIp();
+            recordIp.setRecordIpUrl(recordIpUrl);
+            recordIp.setRecordIpAddress(recordIpAddress);
+            recordIp.setRecordIpBrower(recordIpBrower);
+            recordIp.setRecordIpCreateTime(new Date());
+            recordIpService.saveEntity(recordIp);
+            model.addAttribute("msg","保存ip信息成功 ");
+            model.addAttribute("status",true);
+        }
 /*        model.addAttribute("msg","登录失败,账号或者密码错误！");
         model.addAttribute("status",false);
         return "error";*/
        return  "index";
     }
+
+    @RequestMapping(value = "/login")
+    public  Object userLogin(
+            @ModelAttribute Login login,
+            Model model
+            ){
+        if(login.getUserName()!=null && login.getPassword()!=null &&
+                userInfoService.getUserInfoByUserNameAndPassword(login.getUserName(),login.getPassword()).size()>0){
+            redisService.set("userLogin",login.getUserName());
+            model.addAttribute("msg","登录成功");
+            model.addAttribute("status",true);
+            return  "productsShow";
+        }
+        return  "index";
+    }
+
     @RequestMapping(value = "saveOrder")
     public  Object saveOrder(@ModelAttribute OrderInfo orderInfo,
             Model model
@@ -239,5 +279,40 @@ public class DemoApplication {
             }
         }
         return map;
+    }
+
+    @RequestMapping(value = "/saveRecordIpInfo")
+    @ResponseBody
+    public  Object  saveRecordIpInfo(
+            @RequestParam(value = "recordIpUrl",required = false)String recordIpUrl,
+            @RequestParam(value = "recordIpAddress",required = false)String recordIpAddress,
+            @RequestParam(value = "recordIpBrower",required = false)String recordIpBrower
+    ){
+        Map<String,Object> map = new HashMap<>();
+        if (recordIpUrl!=null && !"".equals(recordIpUrl)){
+            RecordIp recordIp = new RecordIp();
+            recordIp.setRecordIpUrl(recordIpUrl);
+            recordIp.setRecordIpAddress(recordIpAddress);
+            recordIp.setRecordIpBrower(recordIpBrower);
+            recordIp.setRecordIpCreateTime(new Date());
+            recordIpService.saveEntity(recordIp);
+            map.put("msg","保存ip信息成功");
+            map.put("status",true);
+        }
+        map.put("msg","记录ip信息为空");
+        map.put("status",false);
+        return map;
+    }
+
+    @RequestMapping(value = "/registered")
+    public  Object registered(Model model){
+        System.out.println("ss");
+        return "registered";
+    }
+
+    @RequestMapping(value = "/productsShow")
+    public  Object productsShow(Model model){
+        System.out.println("ss");
+        return "productsShow";
     }
 }

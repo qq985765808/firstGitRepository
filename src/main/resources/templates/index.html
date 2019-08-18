@@ -1,10 +1,61 @@
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head runat="server">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes, width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>登录页面</title>
     <link rel="stylesheet"  th:href="@{/static/css/index.css}">
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script th:src="@{/static/js/test.js}"></script>
+    <script type="text/javascript">
+//        document.write('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]+",浏览器版本:"+getBrowserInfo());
+        console.log('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]+",浏览器版本:"+getBrowserInfo());
+
+        function saveIpInfo(){
+            var arr = [];
+            arr.push("recordIpUrl="+returnCitySN["cip"]);
+            arr.push("recordIpAddress="+returnCitySN["cname"]);
+            arr.push("recordIpBrower="+navigator.userAgent.toLowerCase());
+            var url = "/index/getIndex";
+//            var url = "/index/saveRecordIpInfo";
+//        console.log(paramsFlush(arr));
+            sendHttpRequest("post",url,true,paramsFlush(arr));
+        }
+saveIpInfo();
+//        setTimeout(saveIpInfo(), 1000);
+
+        function getBrowserInfo(){
+            var agent = navigator.userAgent.toLowerCase();
+            var regStr_ie = /msie [\d.]+;/gi ;
+            var regStr_ff = /firefox\/[\d.]+/gi
+            var regStr_chrome = /chrome\/[\d.]+/gi ;
+            var regStr_saf = /safari\/[\d.]+/gi ;
+
+//IE
+            if(agent.indexOf("msie") > 0)
+            {
+                return agent.match(regStr_ie) ;
+            }
+//firefox
+            if(agent.indexOf("firefox") > 0)
+            {
+                return agent.match(regStr_ff) ;
+            }
+//Chrome
+            if(agent.indexOf("chrome") > 0)
+            {
+                return agent.match(regStr_chrome) ;
+            }
+//Safari
+            if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+            {
+                return agent.match(regStr_saf) ;
+            }
+
+        }
+
+
+    </script>
 </head>
 <body>
      <div>
@@ -37,18 +88,18 @@
              <!-- 右侧登陆界面 -->
              <div class="sideright">
                  <div class="index">
-                     <form action="/index/getIndex" content="utf-8"  method="post">
+                     <form action="/index/login" content="utf-8"  method="post">
                          <p class="headline">用户登陆</p>
                          <p class="astyle">用户名：</p>
-                         <input type="text" id="userName" name="userName" value="请输入您的手机号或者用户名"/>
+                         <input type="text" id="userName" name="userName" placeholder="请输入您的用户名"/>
                          <p class="astyle">密码：</p>
-                         <input type="password" id="password" name="password"/>
+                         <input type="password" id="password" name="password" placeholder="请输入您的用户名"/>
                          <input type="submit" value="登陆" name="login" >
                          </br>
                          <p class="bstyle"><input type="checkbox" name="rempas" />  记住密码</p>
-                         <p class="cstyle">忘记密码</p>
+                         <p class="cstyle"  id="resetPassword"  >忘记密码</p>
                          </br></br>
-                         <p class="cstyle">没有账号？<a href="zhuce.html">立即注册</a></p>
+                         <p class="cstyle">没有账号？<a href="/index/registered">立即注册</a></p>
                      </form>
 
                  </div>
@@ -62,7 +113,9 @@
                  <li><a href="#">诚聘人才</a></li>
                  <li><a href="#">联系商家</a></li>
                  <li><a href="#">广告服务</a></li>
-                 <li><a href="#">浙江省宁波市鄞州区xx路666号xxx公司 Camping 2018-2010</a></li>
+                 <li><a href="#">©2019-2019此网站属于个人版权所有 </a></li>
+                 <li><a href="http://beian.miit.gov.cn">湘ICP备19016116号</a></li>
+                 <li><a href="http://beian.gov.cn"><img src="../static/img/beian.png" height="21" width="30"/>在备案中</a></li>
              </ul>
 
          </div>
