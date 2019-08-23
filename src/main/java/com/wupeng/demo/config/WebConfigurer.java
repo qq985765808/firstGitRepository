@@ -35,7 +35,7 @@ public class WebConfigurer implements WebMvcConfigurer {
          * excludePathPatterns：不需要拦截的路径，String数组类型可以写多个用","分割
          * */
         registry.addInterceptor(new PassInterceptor()).excludePathPatterns("/static/**").excludePathPatterns("/index/getIndex","\n" +
-                "/index/saveRecordIpInfo","/index.html");
+                "/index/saveRecordIpInfo","/index/login","/index/registered","/index.html");
     }
 
     @Override

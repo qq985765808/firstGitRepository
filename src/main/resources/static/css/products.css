@@ -1,0 +1,16 @@
+.productsDiv {
+    width:1000px;
+    height: 400px;
+    text-align: center;
+    background-color: #d4d4f5;
+    overflow: hidden;
+}
+
+.productsDiv>div {
+    width: 31%;
+    padding-bottom: 31%;
+    margin: 1%;
+    border-radius: 10%;
+    float: left;
+    background-color: orange;
+}
