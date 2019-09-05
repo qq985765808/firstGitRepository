@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>登录页面</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet"  th:href="@{/static/css/index.css}">
 <!--    <style type="text/css">
         body, html,#allmap {display: none;width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
@@ -11,67 +13,14 @@
     <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GVDHzHsBhBsEuMkoCDPCApRiPUFI5SYv"></script>
     <script th:src="@{/static/js/test.js}"></script>
+    <script th:src="@{/static/js/index.js}"></script>
     <script type="text/javascript">
-//        document.write('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]+",浏览器版本:"+getBrowserInfo());
-        console.log('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]+",浏览器版本:"+getBrowserInfo());
-
-        function baiduApi(){
-
-        }
-
-
-
-        function saveIpInfo(){
-            var arr = [];
-            arr.push("recordIpUrl="+returnCitySN["cip"]);
-            arr.push("recordIpAddress="+returnCitySN["cname"]);
-            arr.push("recordIpBrower="+navigator.userAgent.toLowerCase());
-            var url = "/index/getIndex";
-//            var url = "/index/saveRecordIpInfo";
-//        console.log(paramsFlush(arr));
-            sendHttpRequest("post",url,true,paramsFlush(arr));
-        }
-saveIpInfo();
-//        setTimeout(saveIpInfo(), 1000);
-
-        function getBrowserInfo(){
-            var agent = navigator.userAgent.toLowerCase();
-            var regStr_ie = /msie [\d.]+;/gi ;
-            var regStr_ff = /firefox\/[\d.]+/gi
-            var regStr_chrome = /chrome\/[\d.]+/gi ;
-            var regStr_saf = /safari\/[\d.]+/gi ;
-
-//IE
-            if(agent.indexOf("msie") > 0)
-            {
-                return agent.match(regStr_ie) ;
-            }
-//firefox
-            if(agent.indexOf("firefox") > 0)
-            {
-                return agent.match(regStr_ff) ;
-            }
-//Chrome
-            if(agent.indexOf("chrome") > 0)
-            {
-                return agent.match(regStr_chrome) ;
-            }
-//Safari
-            if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
-            {
-                return agent.match(regStr_saf) ;
-            }
-
-        }
-
 
     </script>
 </head>
 <body>
 <div id="allmap"></div>
-     <div>
-          <p th:text="${msg}"></p>
-     </div>
+
      <div class="container">
          <!-- 导航 -->
          <div class="nav">
@@ -99,18 +48,18 @@ saveIpInfo();
              <!-- 右侧登陆界面 -->
              <div class="sideright">
                  <div class="index">
-                     <form action="/index/login" content="utf-8"  method="post">
+                     <form action="/firstDemo/index/login" content="utf-8"  method="post">
                          <p class="headline">用户登陆</p>
                          <p class="astyle">用户名：</p>
                          <input type="text" id="userName" name="userName" placeholder="请输入您的用户名"/>
                          <p class="astyle">密码：</p>
-                         <input type="password" id="password" name="password" placeholder="请输入您的用户名"/>
+                         <input type="password" id="password" name="password" placeholder="请输入您的密码"/>
                          <input type="submit" value="登陆" name="login" >
                          </br>
-                         <p class="bstyle"><input type="checkbox" name="rempas" />  记住密码</p>
+                         <p class="bstyle" ><input type="checkbox" name="rempas" />记住密码</p>
                          <p class="cstyle"  id="resetPassword"  >忘记密码</p>
                          </br></br>
-                         <p class="cstyle">没有账号？<a href="/index/registered">立即注册</a></p>
+                         <p class="cstyle">没有账号？<a href="/firstDemo/index/registered">立即注册</a></p>
                      </form>
 
                  </div>
@@ -138,7 +87,6 @@ saveIpInfo();
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(116.331398,39.897445);
     map.centerAndZoom(point,12);
-
     var geolocation = new BMap.Geolocation();
     geolocation.getCurrentPosition(function(r){
         if(this.getStatus() == BMAP_STATUS_SUCCESS){
@@ -152,14 +100,14 @@ saveIpInfo();
         }
     },{enableHighAccuracy: true})
     //关于状态码
-    //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
-    //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
-    //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
-    //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
-    //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
-    //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
-    //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
-    //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
-    //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+    // //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+    // //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+    // //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+    // //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+    // //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+    // //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+    // //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+    // //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+    // //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
 </script>
 </html>

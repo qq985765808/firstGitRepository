@@ -3,7 +3,7 @@ package com.wupeng.demo.config;
 
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("classpath:application-dev.properties")
+//@PropertySource("classpath:application-dev.properties")
 public class ThymeleafProperties {
     public static  final String DEFAULT_PREFIX = "classpath:/templates/";
 

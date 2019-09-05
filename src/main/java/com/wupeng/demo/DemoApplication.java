@@ -4,17 +4,20 @@ import com.wupeng.demo.pojo.OrderInfo;
 import com.wupeng.demo.pojo.RecordIp;
 import com.wupeng.demo.pojo.SeckillingActivity;
 import com.wupeng.demo.pojo.UserInfo;
-import com.wupeng.demo.repository.SeckillingActivityRepository;
+
 import com.wupeng.demo.service.*;
+import com.wupeng.demo.support.base.BaseController;
+import com.wupeng.demo.util.HttpUtil;
 import com.wupeng.demo.vo.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,12 +36,13 @@ import java.util.Map;
 @SpringBootApplication
 @Controller
 @RequestMapping(value = "index")
-public class DemoApplication  extends SpringBootServletInitializer {
+public class DemoApplication  extends SpringBootServletInitializer  implements Serializable {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(DemoApplication.class);
+            return builder.sources(DemoApplication.class);
     }
+
 
     @Autowired
     private RedisService redisService;

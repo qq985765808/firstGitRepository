@@ -40,7 +40,8 @@ public class PassInterceptor implements HandlerInterceptor {
         if(url!=null ){
             try{
                 if( passInterceptor.redisService.get("userLogin")==null){
-                    //response.sendRedirect("/firstDemo/index/getIndex"); //war包版本的路径
+                    //.sendRedirect("/firstDemo/index/getIndex"); //war包版本的路径
+                    //response.getOutputStream().write("Ne rajtigita".getBytes());
                     response.sendRedirect("/index/getIndex");
                     return false;
                 }

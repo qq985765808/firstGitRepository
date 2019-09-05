@@ -28,23 +28,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-  <!--          <exclusions>
-                &lt;!&ndash; 排除内置Tomcat依赖 &ndash;&gt;
+            <exclusions>
+                <!-- 排除内置Tomcat依赖 -->
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
 
         </dependency>
 
         <!-- 使用原生servlet -->
-<!--        <dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,17 +52,38 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- freemarker模板 -->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>-->
+
+
         <!-- thymeleaf模板 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- http client   -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+
+
         <!-- Cache  -->
-<!--        <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- Redis  -->
         <dependency>
@@ -163,21 +184,21 @@
             </plugin>
 
             <!-- 打war包,支持Tomcat7，排除SpringBoot内嵌Tomcat8依赖。 -->
-<!--            <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
                     <warName>firstDemo</warName>
                     <outputDirectory>target</outputDirectory>
-                    &lt;!&ndash; 排除内嵌Tomcat8依赖jar  &ndash;&gt;
-                    <packagingExcludes>
+                    <!-- 排除内嵌Tomcat8依赖jar  -->
+            <!--        <packagingExcludes>
                         WEB-INF/lib/tomcat-annotations-api-*.jar,
                         WEB-INF/lib/tomcat-embed-*.jar,
                         WEB-INF/lib/spring-boot-starter-tomcat-*.jar
-                    </packagingExcludes>
+                    </packagingExcludes>-->
                 </configuration>
-            </plugin>-->
+            </plugin>
 
         </plugins>
     </build>
