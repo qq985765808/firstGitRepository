@@ -7,8 +7,10 @@ import com.wupeng.demo.pojo.UserInfo;
 
 import com.wupeng.demo.service.*;
 import com.wupeng.demo.support.base.BaseController;
+import com.wupeng.demo.support.service.GeocodingService;
 import com.wupeng.demo.util.HttpUtil;
 import com.wupeng.demo.vo.Login;
+import com.wupeng.demo.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
@@ -25,15 +27,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 @SpringBootApplication
+@ServletComponentScan
 @Controller
 @RequestMapping(value = "index")
 public class DemoApplication  extends SpringBootServletInitializer  implements Serializable {
@@ -43,6 +48,7 @@ public class DemoApplication  extends SpringBootServletInitializer  implements S
             return builder.sources(DemoApplication.class);
     }
 
+    private static final long serialVersionUID = 1L;
 
     @Autowired
     private RedisService redisService;
@@ -54,6 +60,8 @@ public class DemoApplication  extends SpringBootServletInitializer  implements S
     private SeckillingActivityService seckillingActivityService;
     @Autowired
     private RecordIpService recordIpService;
+    @Autowired
+    private GeocodingService geocodingService;
 
 
     public static void main(String[] args) {
@@ -320,4 +328,55 @@ public class DemoApplication  extends SpringBootServletInitializer  implements S
         System.out.println("ss");
         return "productsShow";
     }
+
+    @RequestMapping(value = "/updateUserInfo")
+    public  Object updateUserInfo(Model model){
+
+        return "updateUserInfo";
+    }
+
+    @RequestMapping(value = "/updateUserInfoByUserName")
+    @ResponseBody
+    public  Object  updateUserInfoByUserName(
+            UserInfoVO userInfoVO
+    ){
+        Map<String,Object> map = new HashMap<>();
+        if(userInfoVO!=null && userInfoVO.getUserName()!=null && userInfoVO.getPassword()!=null){
+            if(userInfoService.getUserInfoByUserNameAndPassword(userInfoVO.getUserName(),userInfoVO.getPassword()).size()==0){
+                map.put("msg","用户名或者密码错误，修改失败。");
+                map.put("status",false);
+                return  map;
+            }
+            if (userInfoService.updateUserInfoByUserName(userInfoVO.getResetPassword(),userInfoVO.getUserName())==0){
+                map.put("msg","新密码错误，修改失败。");
+                map.put("status",false);
+                return  map;
+            }
+            map.put("msg","新密码修改成功。");
+            map.put("status",true);
+    }
+        return  map;
+    }
+
+    @RequestMapping(value = "/getMain")
+    public  Object getMainView(Model model){
+        model.addAttribute("userName",redisService.get("userLogin")+",欢迎您");
+        return  "main";
+    }
+
+    @RequestMapping(value = "/getMapView")
+    public  Object getMapView(
+            Model model){
+        return  "map";
+    }
+
+    @RequestMapping(value = "/getMapParam")
+    @ResponseBody
+    public  Object getMapParam(){
+
+        return geocodingService.getMapResult();
+    }
+
+
+
 }

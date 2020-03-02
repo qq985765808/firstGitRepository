@@ -50,7 +50,7 @@ public class HttpClient implements Serializable {
      * @param params 请求参数
      * @return
      */
-    public  static  String sendPostRequest(String reqURL, Map<String,String> params){
+    public static String sendPostRequest(String reqURL, Map<String,String> params){
         return  sendPostRequest(reqURL,params,false,null,null);
     }
 

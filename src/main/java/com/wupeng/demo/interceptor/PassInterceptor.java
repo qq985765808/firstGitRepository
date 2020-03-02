@@ -1,6 +1,9 @@
 package com.wupeng.demo.interceptor;
 
 import com.wupeng.demo.service.RedisService;
+import com.wupeng.demo.util.NetWorkUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class PassInterceptor implements HandlerInterceptor {
 
+     private  final static Log log = LogFactory.getLog(PassInterceptor.class);
 
     @Autowired
     private RedisService redisService;
@@ -34,22 +38,24 @@ public class PassInterceptor implements HandlerInterceptor {
    public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String url = request.getRequestURI();
-        System.out.println(url);
+        //System.out.println(url);
+        log.info("请求路径为："+url);
+        log.info("访问IP为："+ NetWorkUtil.getIpAddress(request));
         // url.indexOf("getIndex")==-1
 
         if(url!=null ){
             try{
                 if( passInterceptor.redisService.get("userLogin")==null){
-                    //.sendRedirect("/firstDemo/index/getIndex"); //war包版本的路径
+                    response.sendRedirect("/firstDemo/index/getIndex"); //war包版本的路径
                     //response.getOutputStream().write("Ne rajtigita".getBytes());
-                    response.sendRedirect("/index/getIndex");
+                    //response.sendRedirect("/index/getIndex");
                     return false;
                 }
                 return   true;
             }catch (Exception e){
                 e.printStackTrace();
-                //response.sendRedirect("/firstDemo/index/getIndex");//war包版本的路径
-                response.sendRedirect("/index/getIndex");
+                response.sendRedirect("/firstDemo/index/getIndex");//war包版本的路径
+                //response.sendRedirect("/index/getIndex");
                 return  false;
             }
         }
@@ -58,12 +64,14 @@ public class PassInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("postHandle...");
+        //System.out.println("postHandle...");
+        log.info("postHandle...");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("afterCompletion...");
+        //System.out.println("afterCompletion...");
+        log.info("afterCompletion...");
     }
 
 

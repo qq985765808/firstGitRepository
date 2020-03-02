@@ -6,6 +6,7 @@ import com.wupeng.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -29,5 +30,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfo> getUserInfoByUserNameAndPassword(String userName, String password) {
         return userInfoRepository.getUserInfoByUserNameAndPassword(userName,password);
+    }
+
+    @Override
+    public int updateUserInfoByUserName(String password, String userName) {
+        return  userInfoRepository.updateUserInfoByUserName(password,userName);
     }
 }

@@ -11,4 +11,6 @@ public interface UserInfoService {
     public  void  saveUserInfo(UserInfo userInfo);
 
     public List<UserInfo>  getUserInfoByUserNameAndPassword(String userName,String password);
+
+    public int updateUserInfoByUserName(String password,String userName);
 }

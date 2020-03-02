@@ -46,7 +46,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         /**
          * 设置默认的首页html页面
          * */
-        registry.addViewController( "/index" ).setViewName( "index" );
-        registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
+        //registry.addViewController( "/index" ).setViewName( "index" );
+        //registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
     }
 }

@@ -15,10 +15,9 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-@SpringBootApplication
+//@SpringBootApplication
 @Controller
-@ServletComponentScan
-public class BaseController<T>  extends SpringBootServletInitializer implements Serializable  {
+public class BaseController<T>   implements Serializable  {
 
     private static final long serialVersionUID = 1L;
     private final  static Log log = LogFactory.getLog(BaseController.class);
@@ -27,7 +26,7 @@ public class BaseController<T>  extends SpringBootServletInitializer implements 
     protected  Class<T>  clazz;
 
 
-    @Override
+  /*  @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         //System.out.println("class="+(this.getClass()!=null?this.getClass().getName():"null"));
         log.info("class="+(this.getClass()!=null?this.getClass().getName():"null"));
@@ -37,12 +36,12 @@ public class BaseController<T>  extends SpringBootServletInitializer implements 
             return builder.sources(BaseController.class);
         }
 
-    }
+    }*/
 
 
-    public  static  void main(String[] args){
+/*    public  static  void main(String[] args){
         SpringApplication.run(BaseController.class);
-    }
+    }*/
 
 
   /*  public BaseController(){

@@ -93,10 +93,10 @@
 
 
         <!-- RabbitMQ -->
-<!--        <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!--ajax jackson-core jar -->
 <!--        <dependency>
@@ -141,7 +141,79 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+
+        <!--POI导出文件-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <!-- 腾讯云短信SMS -->
+        <dependency>
+            <groupId>com.github.qcloudsms</groupId>
+            <artifactId>qcloudsms</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+        <!-- google   -->
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0-rc2</version>
+        </dependency>
+
+        <!--  alibaba fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.50</version>
+        </dependency>
+
+        <!--  google gson   -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6</version>
+         </dependency>
+
+        <!--  gson QRcode 二维码   -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!--  cloud     -->
+ <!--       <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>-->
+
     </dependencies>
+
+<!--    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>-->
+
 
     <build>
         <finalName>firstDemo</finalName>
@@ -162,27 +234,35 @@
                                  <compilerArgument>-implicit:none</compilerArgument>
                    </configuration>
             </plugin>
-            &lt;!&ndash; 资源管理插件 &ndash;&gt;
-           <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${mvn.resources.version}</version>
-            </plugin>
-            &lt;!&ndash; war 管理 &ndash;&gt;
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${mvn.war.version}</version>
-                <configuration>
-                    <warName>${project.artifactId}</warName>
-                </configuration>
-            </plugin>
+
 -->
+            <!-- boot plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!--  resource plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${mvn.resources.version}</version>
+            </plugin>
+
+            <!-- install plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+            </plugin>
+
+            <!-- clean plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+
+
+            <!--  war plugin   -->
             <!-- 打war包,支持Tomcat7，排除SpringBoot内嵌Tomcat8依赖。 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -192,11 +272,11 @@
                     <warName>firstDemo</warName>
                     <outputDirectory>target</outputDirectory>
                     <!-- 排除内嵌Tomcat8依赖jar  -->
-            <!--        <packagingExcludes>
+                    <packagingExcludes>
                         WEB-INF/lib/tomcat-annotations-api-*.jar,
                         WEB-INF/lib/tomcat-embed-*.jar,
                         WEB-INF/lib/spring-boot-starter-tomcat-*.jar
-                    </packagingExcludes>-->
+                    </packagingExcludes>
                 </configuration>
             </plugin>
 

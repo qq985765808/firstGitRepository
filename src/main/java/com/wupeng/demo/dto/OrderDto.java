@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class OrderDto implements Serializable {
-
-    private  static  final  Long serialVersionUID = 1L;
+public class OrderDto  {
 
     private  Long orderId;
 
@@ -48,5 +46,14 @@ public class OrderDto implements Serializable {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "orderId=" + orderId +
+                ", orderSysNum='" + orderSysNum + '\'' +
+                ", orderTime=" + orderTime +
+                '}';
     }
 }
