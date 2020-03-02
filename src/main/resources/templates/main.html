@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XXX管理系统</title>
+    <!--<link rel="stylesheet" href="../static/css/bootstarp/bootstrap.min.css">
+    <script src="../static/js/jquery/jquery-3.0.0.min.js"></script>
+    <script src="../static/js/bootstrap/bootstrap.min.js"></script>-->
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" href="../static/css/utils.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javasript:void(0)">菜单栏</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="javasript:void(0)" style="color: red;" th:text="${userName}"></a></li>
+                <li><a href="/firstDemo/index/registered">免费注册</a></li>
+                <li><a href="javasript:void(0)">在线地图</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        中国大陆
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">中国香港</a></li>
+                        <li><a href="#">中国澳门</a></li>
+                        <li><a href="#">中国台湾</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">美国</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">日本</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">东南亚</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        我的信息
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/firstDemo/userInfo">账号信息</a></li>
+                        <li><a href="#">安全指数</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        订单管理
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">订单信息</a></li>
+                        <li><a href="#">订单更新</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">提交</button>
+        </form>
+    </div>
+</nav>
+<!-- 左边菜单 -->
+<div class="border-left mainDiv"  >
+    <ul style="list-style: none;" class="dropdown-menu-left leftUL">
+        <li><a href="javascript:void(0)">公共模块</a></li>
+        <li><a href="javascript:void(0)">用户信息</a></li>
+        <li><a href="javascript:void(0)">基础资源</a></li>
+        <li><a href="javascript:void(0)">商品管理</a></li>
+        <li><a href="javascript:void(0)">订单管理</a></li>
+        <li><a href="javascript:void(0)">财务报表</a></li>
+    </ul>
+</div>
+
+<div>
+    <img id="QRCode" src="http://localhost:8080/firstDemo/qrCodeController/getQRCodeImag">
+</div>
+
+<!-- 百度地图 -->
+<div id="showMapDiv" style="display: none">
+    <iframe name="map"  src="/firstDemo/index/getMapView" height="400px"  width="1000px" scrolling="yes"></iframe>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>服务器线程信息</title>
+</head>
+<body>
+      <div>
+          <span>
+                <ul th:each="serverThreadInfoVO,userStat:${thraadNameList}">
+                    <li>线程名称信息如下:</li>
+                    <li th:text="${serverThreadInfoVO.getThreadName()}"></li>
+                </ul>
+          </span>
+          <span>
+                <ul th:each="serverThreadInfoVO,userStat:${elementList}">
+                    <li>元素信息如下:</li>
+                    <li th:text="${serverThreadInfoVO.getElement()}"></li>
+                </ul>
+          </span>
+      </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>修改账号密码</title>
+    <script th:src="@{/static/js/jquery/jquery-3.0.0.min.js}"></script>
+    <script th:src="@{/static/js/updateUserInfo.js}"></script>
+</head>
+<body>
+      <p>请输入下面信息</p>
+      用户名:<input  type="text"  id="userName"  /></br>
+      原密码:<input  type="password"  id="password"  /></br>
+      新密码:<input  type="password"  id="resetPassword"  /></br>
+      重密码:<input  type="password"  id="enterPassword"  /></br>
+      <input type="button" id="updateUserInfo" onclick="test()" value="提交"/>
+</body>
+</html>
