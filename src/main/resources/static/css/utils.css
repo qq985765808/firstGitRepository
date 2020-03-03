@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+.red{
+    background-color:red;
+}
+
+.blue{
+    color:blue;
+}
+
+.yellow{
+    color:yellow;
+}
+
+.green{
+    color:green;
+}
+
+.leftUL{
+    float: left;
+    width:160px;
+    height: auto;
+
+}
+
+.leftUL >li{
+    float: left;
+    width:140px;
+    height: auto;
+    font-size: 30px;
+    padding-top: 20px;
+
+}
+
+.mainDiv{
+    float: left;
+    width:190px;
+    height: auto;
+}
