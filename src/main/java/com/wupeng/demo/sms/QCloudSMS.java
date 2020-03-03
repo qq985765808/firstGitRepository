@@ -21,7 +21,7 @@ public class QCloudSMS  implements Serializable {
     private  final  static String RESULT_SUCCESS ="SUCCESS",RESULT_ERROR="ERROR",RESULT_EXCEPTION="EXCEPTION";
 
     private final static int AppID = 14002;
-    private final static String AppKey = "f";
+    private final static String AppKey = "f23";
     private final static  int templateId = 420425,templateNoticeId=420535;
     private final static String smsSign = "wpshoppingcn";
     private String Random = UUID.randomUUID()+"";
