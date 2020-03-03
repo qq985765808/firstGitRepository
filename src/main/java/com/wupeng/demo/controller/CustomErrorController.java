@@ -27,19 +27,19 @@ public class CustomErrorController implements ErrorController {
         switch (statusCode){
             case 400:
                 model.addAttribute("msg","您好:你的请求信息不合法,谢谢！");
-                return "/401";
+                return "/error/401";
             case 401:
                 model.addAttribute("msg","您好:你的身份没有经过服务器认证,请先认证谢谢！");
-                return "/401";
+                return "/error/401";
             case 404:
                 model.addAttribute("msg","您好:你请求的页面不存在,谢谢！");
-                return "/404";
+                return "/error/404";
             case 405:
                 model.addAttribute("msg","您好:你请求的方法被禁止,请换一种请求方式谢谢！");
-                return "/403";
+                return "/error/403";
             default:
                 model.addAttribute("msg","您好:服务器异常,请稍微等待一下谢谢！");
-                return "/500";
+                return "/error/500";
         }
 
     }
