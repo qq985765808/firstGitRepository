@@ -200,6 +200,19 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>-->
 
+        <!--  mongodb -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!-- 增加mongoplus支持 -->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>mongodb-plus-spring-boot-starter</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 <!--    <dependencyManagement>
