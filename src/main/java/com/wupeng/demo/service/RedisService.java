@@ -28,7 +28,11 @@ public class RedisService {
 
     /**
      * 设置过期时间<br>
-     *     timeout:设置多少秒
+     *  timeout:设置多少秒,unit是时间单位（年月日时分秒，具体可看此类）
+     * @param key
+     * @param value
+     * @param timeout
+     * @param unit
      * */
     public void set(String key, Object value, Long timeout, TimeUnit unit){
         //更改在redis里面查看key编码问题
