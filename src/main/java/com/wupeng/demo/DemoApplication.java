@@ -31,9 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -378,5 +376,14 @@ public class DemoApplication  extends SpringBootServletInitializer  implements S
     }
 
 
+    @RequestMapping(value = "/testListString")
+    public  Object  testListString(Model model){
+        List<String> list =  new ArrayList<>();
+        list.add("0");
+        list.add("1");
+        list.add("2");
+        model.addAttribute("key",list);
+        return "orderDto";
+    }
 
 }

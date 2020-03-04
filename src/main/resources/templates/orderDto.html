@@ -20,6 +20,18 @@
         <td th:text="${#dates.format(orderDto.getOrderTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
     </tr>
     </tbody>
+    <table>
+        <thead>
+        <tr>
+            <td>字符串</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="str,userStat:${key}">
+           <!-- <td th:text="${str}"></td>-->
+            <th th:if="${str=='0'}" th:text="${str}">
+        </tr>
+        </tbody>
 </table>
 </body>
 </html>
