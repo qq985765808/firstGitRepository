@@ -29,7 +29,7 @@
         <tbody>
         <tr th:each="str,userStat:${key}">
            <!-- <td th:text="${str}"></td>-->
-            <th th:if="${str=='0'}" th:text="${str}">
+            <td th:if="${str} eq '0'" th:text="${str}"> <!--这里是判断-->
         </tr>
         </tbody>
 </table>
